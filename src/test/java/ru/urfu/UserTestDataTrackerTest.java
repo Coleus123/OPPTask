@@ -88,4 +88,19 @@ class UserTestDataTrackerTest {
         testDataTracker.AddData("user5",1,2,3L);
         assertEquals(Boolean.FALSE,testDataTracker.CheckUser("user6"));
     }
+
+    /**
+     * Проверяет, правильнй ли вопрос возвращается
+     */
+    void QuestionUserTestRight(){
+        assertEquals("Какая самая большая планета в нашей Солнечной системе?", testDataTracker.QuestionUser(5));;
+    }
+
+    /**
+     * Проверяет, правильный ли ответ возвращается
+     */
+    void AnswerUserTestRight(){
+        assertEquals("299792458", testDataTracker.AnswerUser(4));
+    }
+
 }

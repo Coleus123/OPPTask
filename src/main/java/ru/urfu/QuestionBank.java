@@ -1,4 +1,4 @@
-
+package ru.urfu;
 
 public class QuestionBank {
     /**
