@@ -11,13 +11,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class TelegramBot extends TelegramLongPollingBot{
     private String botToken;
     private String botName;
-
+    private Logic logic;
     /**
      *Конструктор телеграмм-бот
      */
-    public TelegramBot(String botName, String botToken) {
+    public TelegramBot(String botName, String botToken, Logic logic) {
         this.botName = botName;
         this.botToken = botToken;
+        this.logic = logic;
     }
 
     /**
@@ -25,13 +26,12 @@ public class TelegramBot extends TelegramLongPollingBot{
      */
     @Override
     public void onUpdateReceived(Update update) {
-        BotTextManager botTextManager = new BotTextManager();
         String chatId = update.getMessage().getChatId().toString();
         String text = update.getMessage().getText();
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(botTextManager.ResponseMessage(text));
+        sendMessage.setText(logic.ResponseMessage(text, chatId));
 
         try {
             this.execute(sendMessage);
