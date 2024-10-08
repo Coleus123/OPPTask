@@ -90,7 +90,7 @@ public class LogicTest {
 
         logic.ResponseMessage("60", "user6");
         logic.ResponseMessage("париж", "user6");
-        logic.ResponseMessage("Четыре", "user6");
+        logic.ResponseMessage("100", "user6");
         logic.ResponseMessage("299792458", "user6");
         logic.ResponseMessage("Юпитер", "user6");
         logic.ResponseMessage("2", "user6");
