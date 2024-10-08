@@ -8,9 +8,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
  */
 public class Main {
     public static void main(String[] args) throws TelegramApiException {
+        Logic logic = new Logic();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         String BOT_NAME = System.getenv("BOT_NAME");
         String BOT_TOKEN = System.getenv("BOT_TOKEN");
-        telegramBotsApi.registerBot(new TelegramBot(BOT_NAME, BOT_TOKEN) {});
+        telegramBotsApi.registerBot(new TelegramBot(BOT_NAME, BOT_TOKEN, logic) {});
     }
 }

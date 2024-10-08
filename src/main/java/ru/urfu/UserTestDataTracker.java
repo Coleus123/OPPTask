@@ -3,6 +3,8 @@ package ru.urfu;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ru.urfu.AnswersBank.*;
+import static ru.urfu.QuestionBank.*;
 
 
 /**
@@ -91,5 +93,83 @@ public class UserTestDataTracker {
     public Boolean CheckUser(String userId){
         return dataMap.containsKey(userId);
     }
+    /**
+     * Возвращает вопрос на котором сейчас пользоваетль
+     */
+    public String QuestionUser(Integer number){
+        switch(number){
+            case 1:
+                return QUES1;
 
+            case 2:
+                return QUES2;
+
+            case 3:
+                return QUES3;
+
+            case 4:
+                return QUES4;
+
+            case 5:
+                return QUES5;
+
+            case 6:
+                return QUES6;
+
+            case 7:
+                return QUES7;
+
+            case 8:
+                return QUES8;
+
+            case 9:
+                return QUES9;
+
+            case 10:
+                return QUES10;
+            default:
+                return "";
+        }
+
+    }
+
+    /**
+     *Возвращает правильный ответ на вопрос
+     */
+    public String AnswerUser(Integer number){
+        switch(number){
+            case 1:
+                return ANSWER1;
+
+            case 2:
+                return ANSWER2;
+
+            case 3:
+                return ANSWER3;
+
+            case 4:
+                return ANSWER4;
+
+            case 5:
+                return ANSWER5;
+
+            case 6:
+                return ANSWER6;
+
+            case 7:
+                return ANSWER7;
+
+            case 8:
+                return ANSWER8;
+
+            case 9:
+                return ANSWER9;
+
+            case 10:
+                return ANSWER10;
+            default:
+                return "";
+        }
+
+    }
 }

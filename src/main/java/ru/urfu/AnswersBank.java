@@ -1,3 +1,5 @@
+package ru.urfu;
+
 /**
  * Класс AnswerBank содержит набор статических окончательных ответов, соответствующих вопросам в QuestionBank.
 
@@ -17,7 +19,7 @@ public class AnswersBank {
     /**
      *  (Число, которое содержит столько же букв, сколько и его название).
      */
-    public static final String ANSWER3 = "Четыре";  // "Four" in Russian: "Четыре"
+    public static final String ANSWER3 = "100";  // "Four" in Russian: "Четыре"
 
     /**
      *  (Скорость света в вакууме в м/с).
