@@ -6,8 +6,11 @@ package ru.urfu;
  */
 public class Logic {
     private UserTestDataTracker userTestDataTracker;
+    private QuesAns quesAns;
     public Logic() {
         userTestDataTracker = new UserTestDataTracker();
+        quesAns = new QuesAns();
+        quesAns.AddBasicQuestion();
     }
     /**
      * Возвращает текст после обработки
@@ -23,15 +26,11 @@ public class Logic {
                     return Constants.EXIT_TEST_FALSE;
                 }
             case "/startTest":
-                if(userTestDataTracker.CheckUser(userId)){
+                if(userTestDataTracker.CheckUser(userId)) {
                     userTestDataTracker.RemoveUser(userId);
-                    userTestDataTracker.AddData(userId, 1,0,System.currentTimeMillis());
-                    return QuestionBank.QUES1;
                 }
-                else{
-                    userTestDataTracker.AddData(userId, 1, 0, System.currentTimeMillis());
-                    return QuestionBank.QUES1;
-                }
+                    userTestDataTracker.AddData(userId, 0,0,System.currentTimeMillis());
+                    return quesAns.getQuestion(0);
             case "/start":
                 if(userTestDataTracker.CheckUser(userId)){
                     userTestDataTracker.RemoveUser(userId);
@@ -47,17 +46,22 @@ public class Logic {
             default:
 
                 if(userTestDataTracker.CheckUser(userId)) {
-                    userTestDataTracker.AddRightNumberOfQuestion(userId, text.equalsIgnoreCase(userTestDataTracker.
-                            AnswerUser(userTestDataTracker.GetNumberOfQuestion(userId))));
+                    userTestDataTracker.AddRightNumberOfQuestion(userId,
+                            text.equalsIgnoreCase(quesAns.getAnswer(
+                                    userTestDataTracker.GetNumberOfQuestion(userId))));
                     userTestDataTracker.AddNumberOfQuestion(userId);
                 }
-                if(userTestDataTracker.CheckUser(userId) && userTestDataTracker.GetNumberOfQuestion(userId) == 11) {
+                if(userTestDataTracker.CheckUser(userId) &&
+                        userTestDataTracker.GetNumberOfQuestion(userId) == quesAns.getNumberOfQuestions()) {
                     text = "Тест завершен за " + userTestDataTracker.GetElapsedUserTime(userId)/1_000 +
-                            " секунд. Правильное количество ответов - " + userTestDataTracker.GetRightNumberOfQuestion(userId) + "/10. " +
+                            " секунд. Правильное количество ответов - " +
+                            userTestDataTracker.GetRightNumberOfQuestion(userId) +
+                            "/"+quesAns.getNumberOfQuestions()+". " +
                             "Пройти тест заново или выйти?";
                 }
-                else if(userTestDataTracker.CheckUser(userId)&& !(userTestDataTracker.GetNumberOfQuestion(userId) == 11)) {
-                    text = userTestDataTracker.QuestionUser(userTestDataTracker.GetNumberOfQuestion(userId));
+                else if(userTestDataTracker.CheckUser(userId)&&
+                        !(userTestDataTracker.GetNumberOfQuestion(userId) == quesAns.getNumberOfQuestions())) {
+                    text = quesAns.getQuestion(userTestDataTracker.GetNumberOfQuestion(userId));
                 }
                 else{
                     text = Constants.INPUT_PREFIX + text;
