@@ -78,7 +78,7 @@ public class LogicTest {
      */
     @Test
     public void testResponseMessageStart() {
-        assertEquals("«Чему равен угол равностороннего треугольника?»", logic.ResponseMessage("/startTest", "user6"));
+        assertEquals("Чему равен угол равностороннего треугольника?", logic.ResponseMessage("/startTest", "user6"));
     }
 
     /**
