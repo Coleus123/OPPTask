@@ -15,7 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SubjectManagerTest {
 
-
+    /**
+     * Тестовый класс для SubjectManager.
+     */
     @TempDir
         Path tempDir;
         private Path subjectPath;
@@ -24,32 +26,37 @@ class SubjectManagerTest {
         private Path answPath;
         private Path filesPath;
 
+    /**
+     * Подготовка данных перед каждым тестом.
+     */
         @BeforeEach
         public void setUp () throws Exception {
-            // Create a directory structure
+
             subjectPath = Files.createDirectory(tempDir.resolve("Math"));
             optionPath = Files.createDirectory(subjectPath.resolve("Algebra"));
 
-            // Creating ques, answ, and files directories
+
             quesPath = Files.createDirectory(optionPath.resolve("ques"));
             answPath = Files.createDirectory(optionPath.resolve("answ"));
             filesPath = Files.createDirectory(optionPath.resolve("files"));
 
-            // Adding mock files to each directory
+
             Files.writeString(quesPath.resolve("question1.txt"), "What is 2+2?");
             Files.writeString(answPath.resolve("answer1.txt"), "4");
             Files.writeString(filesPath.resolve("file1.txt"), "extra content");
         }
-
+    /**
+     * Тест для проверки загрузки данных в SubjectManager.
+     */
         @Test
         public void testPopulateData () {
-            // Initialize SubjectManager with the temp directory
+
             SubjectManager manager = new SubjectManager(tempDir);
 
-            // Retrieve subjects data
+
             Map<String, List<OptionData>> subjects = manager.getSubjects();
 
-            // Assertions
+
             assertNotNull(subjects, "Subjects map should not be null");
             assertEquals(1, subjects.size(), "Expected 1 subject in the map");
             assertTrue(subjects.containsKey("Math"), "Expected 'Math' as a subject");
