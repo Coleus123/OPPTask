@@ -1,6 +1,9 @@
 package ru.urfu;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 /**
  * Класс QuesAns содержит список вопросов и соответствующих ответов.
  * Он предоставляет методы для доступа к вопросам и их ответам.
@@ -103,6 +106,80 @@ public class QuesAns {
             return true;
         }
         return false;
+    }
+
+
+}
+/**
+        * Класс OptionData хранит вопросы и ответы для одного варианта задания.
+        * Содержит методы для добавления вопросов и ответов, а также для их получения.
+ */
+ class OptionData {
+    List<String> questions;
+    List<String> answers;
+    List<String> files;
+
+    /**
+     * Конструктор инициализирует списки для вопросов, ответов и файлов.
+     */
+    public OptionData() {
+        this.questions = new ArrayList<>();
+        this.answers = new ArrayList<>();
+        this.files = new ArrayList<>();
+    }
+
+    /**
+     * Добавляет вопрос.
+
+     */
+    public void addQuestion(String question) {
+        questions.add(question);
+    }
+
+    /**
+     * Добавляет ответ.
+     */
+    public void addAnswer(String answer) {
+        answers.add(answer);
+    }
+
+    /**
+     * Добавляет путь к файлу.
+     *
+
+     */
+    public void addFile(String filePath) {
+        files.add(filePath);
+    }
+
+    /**
+     * Возвращает вопрос по указанному индексу.
+     */
+    public String getQuestion(int index) {
+        if (index >= 0 && index < questions.size()) {
+            return questions.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * Возвращает ответ по указанному индексу.
+     */
+    public String getAnswer(int index) {
+        if (index >= 0 && index < answers.size()) {
+            return answers.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * Возвращает путь к файлу по указанному индексу.
+     */
+    public String getFile(int index) {
+        if (index >= 0 && index < files.size()) {
+            return files.get(index);
+        }
+        return null;
     }
 
 

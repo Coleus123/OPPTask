@@ -24,7 +24,7 @@ public class SubjectManager {
         return subjects;
     }
 
-    private void populateData(Path rootPath) {
+    public void populateData(Path rootPath) {
         try {
 
             Files.list(rootPath).filter(Files::isDirectory).forEach(subjectPath -> {
