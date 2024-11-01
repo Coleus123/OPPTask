@@ -2,10 +2,7 @@ package ru.urfu;
 
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -27,6 +24,8 @@ public class SubjectManager {
     public void populateData(Path rootPath) {
         try {
 
+            List<String> subjectFolders = Arrays.asList("Информатика", "Математика", "Русский язык");
+
             Files.list(rootPath).filter(Files::isDirectory).forEach(subjectPath -> {
                 String subjectName = subjectPath.getFileName().toString();
                 List<OptionData> options = new ArrayList<>();
@@ -39,19 +38,19 @@ public class SubjectManager {
 
                         Path quesPath = optionPath.resolve("ques");
                         if (Files.exists(quesPath) && Files.isDirectory(quesPath)) {
-                            loadTextFiles(quesPath, optionData::addQuestion);
+                            loadTextFiles(quesPath, optionData::addContent);
                         }
 
 
-                        Path answPath = optionPath.resolve("answ");
+                        Path answPath = optionPath.resolve("ans");
                         if (Files.exists(answPath) && Files.isDirectory(answPath)) {
-                            loadTextFiles(answPath, optionData::addAnswer);
+                            loadTextFiles(answPath, optionData::addContent);
                         }
 
 
                         Path filesPath = optionPath.resolve("files");
                         if (Files.exists(filesPath) && Files.isDirectory(filesPath)) {
-                            loadTextFiles(filesPath, optionData::addFile);
+                            loadTextFiles(filesPath, optionData::addContent);
                         }
 
                         options.add(optionData);
@@ -83,6 +82,9 @@ public class SubjectManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Path rootPath = Path.of("C:\\Users\\EDWARD\\Desktop\\oppTask");
+        SubjectManager manager = new SubjectManager(rootPath);
+
     }
 
 

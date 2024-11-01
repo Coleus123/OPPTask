@@ -1,8 +1,7 @@
 package ru.urfu;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import javax.security.auth.Subject;
+import java.util.*;
 
 /**
  * Класс QuesAns содержит список вопросов и соответствующих ответов.
@@ -110,10 +109,7 @@ public class QuesAns {
 
 
 }
-/**
-        * Класс OptionData хранит вопросы и ответы для одного варианта задания.
-        * Содержит методы для добавления вопросов и ответов, а также для их получения.
- */
+
  class OptionData {
     List<String> questions;
     List<String> answers;
@@ -128,30 +124,15 @@ public class QuesAns {
         this.files = new ArrayList<>();
     }
 
-    /**
-     * Добавляет вопрос.
-
-     */
-    public void addQuestion(String question) {
+    public void addContent(String s) {
+    }
+    public void addContent(String question, String answer, String filePath) {
         questions.add(question);
-    }
-
-    /**
-     * Добавляет ответ.
-     */
-    public void addAnswer(String answer) {
         answers.add(answer);
+        if (filePath != null && !filePath.isEmpty()) {
+            files.add(filePath);
+        }
     }
-
-    /**
-     * Добавляет путь к файлу.
-     *
-
-     */
-    public void addFile(String filePath) {
-        files.add(filePath);
-    }
-
     /**
      * Возвращает вопрос по указанному индексу.
      */
@@ -183,7 +164,8 @@ public class QuesAns {
     }
 
 
-}
+
+ }
 
 
 
