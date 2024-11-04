@@ -29,7 +29,7 @@ public class QuesAnsTest {
 
     @Test
     public void testSetMethodWithNoFilepath() {
-        // Add a question-answer pair without a filepath
+
         quesAns.Set("What is Java?", "Java is a programming language.", "");
 
         // Verify the question, answer, and "none" filepath are added correctly
@@ -41,7 +41,7 @@ public class QuesAnsTest {
 
     @Test
     public void testSetMethodWithFilepath() {
-        // Add a question-answer pair with a filepath
+
         quesAns.Set("What is Java?", "Java is a programming language.", "src/ЕГЭ/sample.txt");
 
         // Verify the question, answer, and filepath are added correctly
@@ -53,7 +53,7 @@ public class QuesAnsTest {
 
     @Test
     public void testProjectDirectoryCreation() {
-        // Verify the data/questions directory was created
+
         File projectDir = new File("ЕГЭ");
         assertTrue(projectDir.exists(), "Project-relative directory 'ЕГЭ' should exist");
         assertTrue(projectDir.isDirectory(), "ЕГЭ should be a directory");
