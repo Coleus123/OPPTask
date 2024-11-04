@@ -57,7 +57,7 @@ public class SubjectManager {
                                         // Загружаем вопросы, ответы и файлы из соответствующих папок варианта
                                         loadFolderContents(optionPath.resolve("ques"), optionData::getQuestion);
                                         loadFolderContents(optionPath.resolve("ans"), optionData::getAnswer);
-                                        loadFolderContents(optionPath.resolve("files"), optionData::getFile);
+
 
                                         options.add(optionData);
                                     });

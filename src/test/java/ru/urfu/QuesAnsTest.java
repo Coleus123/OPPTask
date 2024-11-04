@@ -24,7 +24,6 @@ public class QuesAnsTest {
         assertEquals(0, quesAns.getNumberOfQuestions());
         assertNull(quesAns.getQuestion(0));
         assertNull(quesAns.getAnswer(0));
-        assertNull(quesAns.getFile(0));
     }
 
     @Test
@@ -36,7 +35,7 @@ public class QuesAnsTest {
         assertEquals(1, quesAns.getNumberOfQuestions());
         assertEquals("What is Java?", quesAns.getQuestion(0));
         assertEquals("Java is a programming language.", quesAns.getAnswer(0));
-        assertEquals("none", quesAns.getFile(0));
+
     }
 
     @Test
@@ -48,7 +47,6 @@ public class QuesAnsTest {
         assertEquals(1, quesAns.getNumberOfQuestions());
         assertEquals("What is Java?", quesAns.getQuestion(0));
         assertEquals("Java is a programming language.", quesAns.getAnswer(0));
-        assertEquals("data/questions/sample.txt", quesAns.getFile(0));
     }
 
     @Test

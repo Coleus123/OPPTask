@@ -14,15 +14,12 @@ public class QuesAns {
 
      List<String> questions;
      List<String> answers;
-     List<String> files;
-
     /**
      * Конструктор инициализирует списки для вопросов, ответов и файлов.
      */
     public QuesAns() {
         this.questions = new ArrayList<>();
         this.answers = new ArrayList<>();
-        this.files = new ArrayList<>();
         File projectDir = new File("ЕГЭ");
         if (!projectDir.exists()) {
             projectDir.mkdirs();
@@ -35,11 +32,6 @@ public class QuesAns {
     public void Set(String question,String answer,String filepath){
         questions.add(question);
         answers.add(answer);
-        if (filepath!=null && !filepath.isEmpty()){
-            files.add(filepath);}
-
-            else{files.add("none");
-            }
     }
 
     /*
@@ -57,13 +49,6 @@ public class QuesAns {
     }
 
     /**
-     * Возвращает путь к файлу по указанному индексу.
-     */
-    public String getFile(int index) {
-        return index >= 0 && index < files.size() ? files.get(index) : null;
-    }
-
-    /**
      * Возвращает количество вопросов.
      */
     public Integer getNumberOfQuestions() {
@@ -71,9 +56,6 @@ public class QuesAns {
     }
 
     public void getQuestion(String s) {
-    }
-
-    public void getFile(String s) {
     }
 
     public void getAnswer(String s) {
