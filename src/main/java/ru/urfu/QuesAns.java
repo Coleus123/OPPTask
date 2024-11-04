@@ -17,14 +17,7 @@ public class QuesAns {
     /**
      * Конструктор инициализирует списки для вопросов, ответов и файлов.
      */
-    public QuesAns() {
-        this.questions = new ArrayList<>();
-        this.answers = new ArrayList<>();
-        File projectDir = new File("ЕГЭ");
-        if (!projectDir.exists()) {
-            projectDir.mkdirs();
-        }
-    }
+
 
     /**
      * Загружает вопросы, ответы и пути файлов из заданного каталога.
@@ -61,9 +54,6 @@ public class QuesAns {
     public void getAnswer(String s) {
     }
 
-    public void AddBasicQuestion() {
-        ;
-    }
 }
 
 

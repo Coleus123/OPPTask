@@ -16,6 +16,7 @@ public class SubjectManager {
         populateData(rootPath);
     }
 
+
     /**
      * Возвращает карту предметов и вариантов.
      */
