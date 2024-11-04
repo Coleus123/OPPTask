@@ -40,7 +40,7 @@ public class SubjectManager {
      */
     public void populateData(Path rootPath) {
         try {
-
+            // Предполагаем, что корневой каталог содержит папки с названиями предметов
             Files.list(rootPath)
                     .filter(Files::isDirectory)
                     .forEach(subjectPath -> {

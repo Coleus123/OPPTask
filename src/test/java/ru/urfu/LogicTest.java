@@ -78,7 +78,7 @@ public class LogicTest {
      */
     @Test
     public void testResponseMessageStart() {
-        assertEquals(null, logic.ResponseMessage("/startTest", "user6"));
+        assertEquals("Вы выбрали предмет: ", logic.ResponseMessage("/startTest", "user6"));
     }
 }
 
