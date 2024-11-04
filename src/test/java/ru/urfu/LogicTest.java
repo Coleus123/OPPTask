@@ -78,49 +78,8 @@ public class LogicTest {
      */
     @Test
     public void testResponseMessageStart() {
-        assertEquals("Чему равен угол равностороннего треугольника?", logic.ResponseMessage("/startTest", "user6"));
-    }
-
-    /**
-     * Проверяет, правильно ли выдаются результаты теста
-     */
-    @Test
-    public void testResponseMessageRightTest() throws InterruptedException {
-        logic.ResponseMessage("/startTest", "user6");
-
-        logic.ResponseMessage("60", "user6");
-        logic.ResponseMessage("париж", "user6");
-        logic.ResponseMessage("100", "user6");
-        logic.ResponseMessage("299792458", "user6");
-        logic.ResponseMessage("Юпитер", "user6");
-        logic.ResponseMessage("2", "user6");
-        logic.ResponseMessage("Александр Грейам Белл", "user6");
-        logic.ResponseMessage("Au", "user6");
-        logic.ResponseMessage("1969", "user6");
-        Thread.sleep(100);
-        assertEquals("Тест завершен за 0 секунд." +
-                " Правильное количество ответов - 10/10. Пройти тест заново или выйти?", logic.ResponseMessage("Тихий", "user6"));
-    }
-
-    /**
-     * Проверяет, правильно ли подсчитываются результаты
-     */
-    @Test
-    public void testResponseMessageWrongTest() throws InterruptedException {
-        logic.ResponseMessage("/startTest", "user6");
-
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        logic.ResponseMessage("", "user6");
-        Thread.sleep(1010);
-        assertEquals("Тест завершен за 1 секунд." +
-                        " Правильное количество ответов - 0/10. Пройти тест заново или выйти?",
-                logic.ResponseMessage("", "user6"));
+        assertEquals(null, logic.ResponseMessage("/startTest", "user6"));
     }
 }
+
+

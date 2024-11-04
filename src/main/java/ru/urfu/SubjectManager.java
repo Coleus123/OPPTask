@@ -4,69 +4,63 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 
-
 /**
  * Класс SubjectManager управляет предметами, вариантами заданий и хранит вопросы и ответы.
  * Считывает вопросы и ответы из текстовых файлов, организованных по предметам.
  */
 public class SubjectManager {
-    private Map<String, List<OptionData>> subjects;
+    private Map<String, List<QuesAns>> subjects;
 
     public SubjectManager(Path rootPath) {
         this.subjects = new HashMap<>();
         populateData(rootPath);
     }
 
-    public Map<String, List<OptionData>> getSubjects() {
+    public Map<String, List<QuesAns>> getSubjects() {
         return subjects;
     }
 
+    /**
+     * Загружает данные по каждому предмету и варианту, организованному в папках.
+     */
     public void populateData(Path rootPath) {
         try {
 
-            List<String> subjectFolders = Arrays.asList("Информатика", "Математика", "Русский язык");
+            Files.list(rootPath)
+                    .filter(Files::isDirectory)
+                    .forEach(subjectPath -> {
+                        String subjectName = subjectPath.getFileName().toString();
+                        List<QuesAns> options = new ArrayList<>();
 
-            Files.list(rootPath).filter(Files::isDirectory).forEach(subjectPath -> {
-                String subjectName = subjectPath.getFileName().toString();
-                List<OptionData> options = new ArrayList<>();
+                        try {
+
+                            Files.list(subjectPath)
+                                    .filter(Files::isDirectory)
+                                    .forEach(optionPath -> {
+                                        QuesAns optionData = new QuesAns();
 
 
-                try {
-                    Files.list(subjectPath).filter(Files::isDirectory).forEach(optionPath -> {
-                        OptionData optionData = new OptionData();
+                                        loadFolderContents(optionPath.resolve("ques"), optionData::getQuestion);
+                                        loadFolderContents(optionPath.resolve("ans"), optionData::getAnswer);
+                                        loadFolderContents(optionPath.resolve("files"), optionData::getFile);
 
-
-                        Path quesPath = optionPath.resolve("ques");
-                        if (Files.exists(quesPath) && Files.isDirectory(quesPath)) {
-                            loadTextFiles(quesPath, optionData::addContent);
+                                        options.add(optionData);
+                                    });
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
 
-
-                        Path answPath = optionPath.resolve("ans");
-                        if (Files.exists(answPath) && Files.isDirectory(answPath)) {
-                            loadTextFiles(answPath, optionData::addContent);
-                        }
-
-
-                        Path filesPath = optionPath.resolve("files");
-                        if (Files.exists(filesPath) && Files.isDirectory(filesPath)) {
-                            loadTextFiles(filesPath, optionData::addContent);
-                        }
-
-                        options.add(optionData);
+                        subjects.put(subjectName, options);
                     });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                subjects.put(subjectName, options);
-            });
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadTextFiles(Path folderPath, ContentLoader loader) {
+    /**
+     * Загружает содержимое текстовых файлов из папки и передает его в соответствующий загрузчик контента.
+     */
+    private void loadFolderContents(Path folderPath, ContentLoader loader) {
         try {
             Files.list(folderPath)
                     .filter(Files::isRegularFile)
@@ -82,11 +76,7 @@ public class SubjectManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Path rootPath = Path.of("C:\\Users\\EDWARD\\Desktop\\oppTask");
-        SubjectManager manager = new SubjectManager(rootPath);
-
     }
-
 
     @FunctionalInterface
     private interface ContentLoader {

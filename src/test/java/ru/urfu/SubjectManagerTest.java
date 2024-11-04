@@ -17,17 +17,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class SubjectManagerTest {
 
 
+    public SubjectManager subjectManager;
+
+    Path rootPath = Paths.get("C:\\Users\\EDWARD\\Desktop\\oppTask\\src\\ЕГЭ");
+    @BeforeEach
+    public void setup(){
+        subjectManager =new SubjectManager(rootPath);
+    }
     /**
      * Тест для проверки загрузки данных в SubjectManager.
      */
         @Test
         public void testPopulateData() {
 
-            Path rootPath = Paths.get("C:\\Users\\EDWARD\\Desktop\\oppTask\\data");
+            Path rootPath = Paths.get("C:\\Users\\EDWARD\\Desktop\\oppTask\\src\\ЕГЭ");
 
 
             SubjectManager subjectManager = new SubjectManager(rootPath);
-            Map<String, List<OptionData>> subjects = subjectManager.getSubjects();
+            Map<String, List<QuesAns>> subjects = subjectManager.getSubjects();
 
             assertNotNull(subjects);
             assertEquals(3, subjects.size(), "Ожидается загрузка 3 предметов");
@@ -37,7 +44,7 @@ class SubjectManagerTest {
             assertTrue(subjects.containsKey("Русский язык"));
 
 
-            List<OptionData> mathOptions = subjects.get("Математика");
+            List<QuesAns> mathOptions = subjects.get("Математика");
             assertNotNull(mathOptions);
             assertFalse(mathOptions.isEmpty());
 
