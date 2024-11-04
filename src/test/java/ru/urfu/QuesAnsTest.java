@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import ru.urfu.QuesAns;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.*;
 public class QuesAnsTest {
 
@@ -14,16 +16,47 @@ public class QuesAnsTest {
     @Before
     public void setUp() {
         quesAns = new QuesAns();
-
-        quesAns.loadContentFromDirectory("C:\\Users\\EDWARD\\Desktop\\oppTask\\src\\ЕГЭ");
     }
 
     @Test
-    public void loadContentFromDirectory() {
-        assertEquals(0,quesAns.getNumberOfQuestions());
+    public void testInitialEmptyState() {
+        // Verify that the initial state has no questions
+        assertEquals(0, quesAns.getNumberOfQuestions());
         assertNull(quesAns.getQuestion(0));
         assertNull(quesAns.getAnswer(0));
         assertNull(quesAns.getFile(0));
+    }
+
+    @Test
+    public void testSetMethodWithNoFilepath() {
+        // Add a question-answer pair without a filepath
+        quesAns.Set("What is Java?", "Java is a programming language.", "");
+
+        // Verify the question, answer, and "none" filepath are added correctly
+        assertEquals(1, quesAns.getNumberOfQuestions());
+        assertEquals("What is Java?", quesAns.getQuestion(0));
+        assertEquals("Java is a programming language.", quesAns.getAnswer(0));
+        assertEquals("none", quesAns.getFile(0));
+    }
+
+    @Test
+    public void testSetMethodWithFilepath() {
+        // Add a question-answer pair with a filepath
+        quesAns.Set("What is Java?", "Java is a programming language.", "src/ЕГЭ/sample.txt");
+
+        // Verify the question, answer, and filepath are added correctly
+        assertEquals(1, quesAns.getNumberOfQuestions());
+        assertEquals("What is Java?", quesAns.getQuestion(0));
+        assertEquals("Java is a programming language.", quesAns.getAnswer(0));
+        assertEquals("data/questions/sample.txt", quesAns.getFile(0));
+    }
+
+    @Test
+    public void testProjectDirectoryCreation() {
+        // Verify the data/questions directory was created
+        File projectDir = new File("ЕГЭ");
+        assertTrue(projectDir.exists(), "Project-relative directory 'ЕГЭ' should exist");
+        assertTrue(projectDir.isDirectory(), "ЕГЭ should be a directory");
     }
 }
 

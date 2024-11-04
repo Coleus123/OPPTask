@@ -23,37 +23,26 @@ public class QuesAns {
         this.questions = new ArrayList<>();
         this.answers = new ArrayList<>();
         this.files = new ArrayList<>();
+        File projectDir = new File("ЕГЭ");
+        if (!projectDir.exists()) {
+            projectDir.mkdirs();
+        }
     }
 
     /**
      * Загружает вопросы, ответы и пути файлов из заданного каталога.
      */
-    public void loadContentFromDirectory(String directoryPath) {
-        File dir = new File("C:\\\\Users\\\\EDWARD\\\\Desktop\\\\oppTask\\\\src\\\\ЕГЭ");
-        File[] questionFiles = new File(dir, "ques").listFiles();
-        File[] answerFiles = new File(dir, "ans").listFiles();
+    public void Set(String question,String answer,String filepath){
+        questions.add(question);
+        answers.add(answer);
+        if (filepath!=null && !filepath.isEmpty()){
+            files.add(filepath);}
 
-        if (questionFiles == null || answerFiles == null) {
-            System.out.println("Не удалось найти папки вопросов или ответов.");
-            return;
-        }
-
-        try {
-            for (File questionFile : questionFiles) {
-                String question = new String(Files.readAllBytes(questionFile.toPath()));
-                questions.add(question);
-                files.add(questionFile.getAbsolutePath());
+            else{files.add("none");
             }
-            for (File answerFile : answerFiles) {
-                String answer = new String(Files.readAllBytes(answerFile.toPath()));
-                answers.add(answer);
-            }
-        } catch (IOException e) {
-            System.out.println("Ошибка при чтении файлов: " + e.getMessage());
-        }
     }
 
-    /**
+    /*
      * Возвращает вопрос по указанному индексу.
      */
     public String getQuestion(int index) {
@@ -91,7 +80,7 @@ public class QuesAns {
     }
 
     public void AddBasicQuestion() {
-        loadContentFromDirectory("C:\\Users\\EDWARD\\Desktop\\oppTask\\src\\ЕГЭ");
+        ;
     }
 }
 
