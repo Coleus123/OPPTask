@@ -16,9 +16,24 @@ public class SubjectManager {
         populateData(rootPath);
     }
 
+    /**
+     * Возвращает карту предметов и вариантов.
+     */
     public Map<String, List<QuesAns>> getSubjects() {
         return subjects;
     }
+
+    public QuesAns getVariant(String subjectName, int variantNumber) {
+
+        List<QuesAns> variants = subjects.get(subjectName);
+
+        if (variants != null && variantNumber >= 0 && variantNumber < variants.size()) {
+            return variants.get(variantNumber);
+        }
+
+        return null;
+    }
+
 
     /**
      * Загружает данные по каждому предмету и варианту, организованному в папках.
@@ -33,13 +48,13 @@ public class SubjectManager {
                         List<QuesAns> options = new ArrayList<>();
 
                         try {
-
+                            // В каждой папке предмета ищем подкаталоги, которые представляют варианты
                             Files.list(subjectPath)
                                     .filter(Files::isDirectory)
                                     .forEach(optionPath -> {
                                         QuesAns optionData = new QuesAns();
 
-
+                                        // Загружаем вопросы, ответы и файлы из соответствующих папок варианта
                                         loadFolderContents(optionPath.resolve("ques"), optionData::getQuestion);
                                         loadFolderContents(optionPath.resolve("ans"), optionData::getAnswer);
                                         loadFolderContents(optionPath.resolve("files"), optionData::getFile);
@@ -78,6 +93,10 @@ public class SubjectManager {
         }
     }
 
+
+    /**
+     * Это используется при определении того, как следует динамически загружать контент.
+     */
     @FunctionalInterface
     private interface ContentLoader {
         void load(String content);

@@ -1,6 +1,10 @@
 package ru.urfu;
 
 
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Класс, который работает с тексом для бота
  */
@@ -9,8 +13,10 @@ public class Logic {
     private QuesAns quesAns;
     public Logic() {
         userTestDataTracker = new UserTestDataTracker();
+
         quesAns = new QuesAns();
         quesAns.AddBasicQuestion();
+
     }
     /**
      * Возвращает текст после обработки
@@ -30,6 +36,7 @@ public class Logic {
                     userTestDataTracker.RemoveUser(userId);
                 }
                     userTestDataTracker.AddData(userId, 0,0,System.currentTimeMillis());
+
                     return quesAns.getQuestion(0);
             case "/start":
                 if(userTestDataTracker.CheckUser(userId)){
