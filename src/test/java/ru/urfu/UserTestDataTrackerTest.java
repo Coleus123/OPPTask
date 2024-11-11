@@ -28,8 +28,8 @@ class UserTestDataTrackerTest {
         testDataTracker.addData("user1","Математика",2l);
         assertEquals("Математика", testDataTracker.getSubject("user1"));
         assertEquals(2l, testDataTracker.getOption("user1"));
-        assertEquals(1, testDataTracker.getNumberOfQuestion("user1"));
-        assertEquals(2, testDataTracker.getRightNumberOfQuestion("user1"));
+        assertEquals(0, testDataTracker.getNumberOfQuestion("user1"));
+        assertEquals(0, testDataTracker.getRightNumberOfQuestion("user1"));
         Thread.sleep(100);
         assertEquals(System.currentTimeMillis() - testDataTracker.getUserTime("user1")
                 , 100, 50);
@@ -43,7 +43,7 @@ class UserTestDataTrackerTest {
     void addNumberOfQuestion() {
         testDataTracker.addData("user2","Информатика",2L);
         testDataTracker.addNumberOfQuestion("user2");
-        assertEquals(2, testDataTracker.getNumberOfQuestion("user2"));
+        assertEquals(1, testDataTracker.getNumberOfQuestion("user2"));
     }
 
     /**
@@ -53,9 +53,9 @@ class UserTestDataTrackerTest {
     void addRightNumberOfQuestion() {
         testDataTracker.addData("user3","Информатика",2L);
         testDataTracker.addRightNumberOfQuestion("user3", Boolean.TRUE);
-        assertEquals(3, testDataTracker.getRightNumberOfQuestion("user3"));
+        assertEquals(1, testDataTracker.getRightNumberOfQuestion("user3"));
         testDataTracker.addRightNumberOfQuestion("user3", Boolean.FALSE);
-        assertEquals(3, testDataTracker.getRightNumberOfQuestion("user3"));
+        assertEquals(1, testDataTracker.getRightNumberOfQuestion("user3"));
     }
 
     /**

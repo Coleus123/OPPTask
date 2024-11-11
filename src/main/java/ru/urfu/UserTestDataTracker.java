@@ -66,7 +66,7 @@ public class UserTestDataTracker {
      */
 
     public void addNumberOfQuestion(String userId){
-        dataMap.get(userId).setRightNumQues(dataMap.get(userId).getNumQues()+1);
+        dataMap.get(userId).setNumQues(dataMap.get(userId).getNumQues()+1);
     }
     /**
      * В случае правильного ответа добавляет еденицу к количесту правильных ответов

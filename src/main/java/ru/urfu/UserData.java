@@ -13,8 +13,8 @@ public class UserData {
     /**
      * Конструктор
      */
-    void UserData(){
-        data = new ArrayList<Long>();
+    public UserData(){
+        data = new ArrayList<>();
     }
 
     /**
@@ -22,10 +22,10 @@ public class UserData {
      */
     public void addUserStateExam (String subject, Long option){
         this.subject = subject;
-        this.data.add(option);
-        this.data.add(1l);
-        this.data.add(0l);
-        this.data.add(System.currentTimeMillis());
+        data.add(option);
+        data.add(0L);
+        data.add(0L);
+        data.add(System.currentTimeMillis());
     }
 
     /**

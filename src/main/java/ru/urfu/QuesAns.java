@@ -1,14 +1,16 @@
 package ru.urfu;
 
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Класс QuesAns содержит список вопросов и соответствующих ответов.
  * Он предоставляет методы для доступа к вопросам и их ответам.
  */
 
 public class QuesAns {
-    private  ArrayList<String> questions;
-    private  ArrayList<String> answers;
+    private List<String> questions;
+    private  List<String> answers;
     /**
      * Конструктор для инициализации списков вопросов и ответов.
      */
@@ -54,7 +56,8 @@ public class QuesAns {
 
         this.questions.add("Какой океан самый большой на Земле?");
         this.answers.add("Тихий");
-    }/**
+    }
+    /**
      * Добавляет новый вопрос и соответствующий ему ответ в список.
      */ public  void addQuestionAndAnswer(String question, String answer) {
         this.questions.add(question);
@@ -62,7 +65,7 @@ public class QuesAns {
     }
 
     /**
-     * Получает вопрос по указанному индексу.
+     * Получает вопрос по указанному индексу, начиная с нуля
      * @return Строка вопроса.
      */
     public  String getQuestion(int index) {

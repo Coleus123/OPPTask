@@ -18,13 +18,12 @@ public class UserDataTest {
     @Test
     public void addUserStateExamTest() throws InterruptedException {
         userData.addUserStateExam("Математика", 2l);
-        assertEquals(userData.getSubject(), "Математика");
-        assertEquals(userData.getOption(),2);
-        assertEquals(userData.getNumQues(), 1l);
-        assertEquals(userData.getRightNumQues(), 0l);
+        assertEquals("Математика", userData.getSubject());
+        assertEquals(2,userData.getOption());
+        assertEquals(0l,userData.getNumQues());
+        assertEquals(0l,userData.getRightNumQues());
         Thread.sleep(100);
-        assertEquals(System.currentTimeMillis() - userData.getStartTime(),
-                100, 50);
+        assertEquals(100, System.currentTimeMillis() - userData.getStartTime(), 50);
     }
 
     /**
@@ -34,7 +33,7 @@ public class UserDataTest {
     public void setOptionTest(){
         userData.addUserStateExam("Информатика", 3l);
         userData.setOption(2l);
-        assertEquals(userData.getOption(), 2l);
+        assertEquals(2l,userData.getOption());
     }
     /**
      * Проверяет праивльно ли присваивается номер вопроса
@@ -43,7 +42,7 @@ public class UserDataTest {
     public void setNumQuesTest(){
         userData.addUserStateExam("Информатика", 3l);
         userData.setNumQues(5l);
-        assertEquals(userData.getNumQues(), 5l);
+        assertEquals(5l, userData.getNumQues());
     }
 
     /**
@@ -53,6 +52,6 @@ public class UserDataTest {
     public void setRightNumQuesTest(){
         userData.addUserStateExam("Информатика", 3l);
         userData.setRightNumQues(5l);
-        assertEquals(userData.getRightNumQues(), 5l);
+        assertEquals(5l, userData.getRightNumQues());
     }
 }
