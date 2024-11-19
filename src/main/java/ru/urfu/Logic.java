@@ -10,10 +10,10 @@ import java.util.List;
 public class Logic {
     private UserTestDataTracker userTestDataTracker;
     private SubjectManager subjectManager;
-    public Logic() {
+    public Logic(String filePath) {
         userTestDataTracker = new UserTestDataTracker();
         subjectManager = new SubjectManager();
-        subjectManager.populateData("ЕГЭ");
+        subjectManager.populateData(filePath);
     }
     /**
      * Возвращает текст после обработки
@@ -126,7 +126,7 @@ public class Logic {
                             subjectManager.getVariant(
                                             userTestDataTracker.getSubject(userId),
                                             userTestDataTracker.getOption(userId).intValue())
-                                    .getNumberOfQuestions()){
+                                            .getNumberOfQuestions()){
                         String question = subjectManager.getVariant(userTestDataTracker.getSubject(userId),
                                         userTestDataTracker.getOption(userId).intValue())
                                 .getQuestion(userTestDataTracker
