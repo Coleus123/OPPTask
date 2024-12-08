@@ -4,6 +4,15 @@ package ru.urfu;
  * Содержит константы, используемые в текстовом боте.
  */
 public class Constants {
+
+    /**
+     * Пользователь неправильно ответил
+     */
+    public static final String WRONG_ANSWER = "Вы ответили неправильно";
+    /**
+     * Пользователь правильно ответил
+     */
+    public static final String RIGHT_ANSWER = "Вы ответили правильно";
     /**
      * Поясняет, что делает бот
      */
