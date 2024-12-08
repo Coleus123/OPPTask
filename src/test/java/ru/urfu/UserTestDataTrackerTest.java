@@ -23,21 +23,27 @@ class UserTestDataTrackerTest {
      * возвращения времени начала теста GetUserTime
      */
     @Test
-    void addDataTestAndGetNumberOfQuestionTestAndGetRightNumberOfQuestionTestAndGetUserTimeTest() {
-        testDataTracker.AddData("user1",1,2,3L);
-        assertEquals(1, testDataTracker.GetNumberOfQuestion("user1"));
-        assertEquals(2, testDataTracker.GetRightNumberOfQuestion("user1"));
-        assertEquals(3L, testDataTracker.GetUserTime("user1"));
+    void addDataTestAndGetNumberOfQuestionTestAndGetRightNumberOfQuestionTestAndGetUserTimeTest()
+            throws InterruptedException {
+        testDataTracker.addData("user1","Математика",2l);
+        assertEquals("Математика", testDataTracker.getSubject("user1"));
+        assertEquals(2l, testDataTracker.getOption("user1"));
+        assertEquals(0, testDataTracker.getNumberOfQuestion("user1"));
+        assertEquals(0, testDataTracker.getRightNumberOfQuestion("user1"));
+        Thread.sleep(100);
+        assertEquals(System.currentTimeMillis() - testDataTracker.getUserTime("user1")
+                , 100, 50);
     }
+
 
     /**
      * Проверяет метод AddNumberOfQuestion на добавление еденицы к номеру вопроса, на котором сейчас пользователь
      */
     @Test
     void addNumberOfQuestion() {
-        testDataTracker.AddData("user2",1,2,3L);
-        testDataTracker.AddNumberOfQuestion("user2");
-        assertEquals(2, testDataTracker.GetNumberOfQuestion("user2"));
+        testDataTracker.addData("user2","Информатика",2L);
+        testDataTracker.addNumberOfQuestion("user2");
+        assertEquals(1, testDataTracker.getNumberOfQuestion("user2"));
     }
 
     /**
@@ -45,11 +51,11 @@ class UserTestDataTrackerTest {
      */
     @Test
     void addRightNumberOfQuestion() {
-        testDataTracker.AddData("user3",1,2,3L);
-        testDataTracker.AddRightNumberOfQuestion("user3", Boolean.TRUE);
-        assertEquals(3, testDataTracker.GetRightNumberOfQuestion("user3"));
-        testDataTracker.AddRightNumberOfQuestion("user3", Boolean.FALSE);
-        assertEquals(3, testDataTracker.GetRightNumberOfQuestion("user3"));
+        testDataTracker.addData("user3","Информатика",2L);
+        testDataTracker.addRightNumberOfQuestion("user3", Boolean.TRUE);
+        assertEquals(1, testDataTracker.getRightNumberOfQuestion("user3"));
+        testDataTracker.addRightNumberOfQuestion("user3", Boolean.FALSE);
+        assertEquals(1, testDataTracker.getRightNumberOfQuestion("user3"));
     }
 
     /**
@@ -57,19 +63,19 @@ class UserTestDataTrackerTest {
      */
     @Test
     void RemoveUserTestAndGetSizeOfUsersTest(){
-        testDataTracker.AddData("user",1,2,3L);
-        assertEquals(1, testDataTracker.GetSizeOfUsers());
-        testDataTracker.RemoveUser("user");
-        assertEquals(0, testDataTracker.GetSizeOfUsers());
+        testDataTracker.addData("user","Информатика",2L);
+        assertEquals(1, testDataTracker.getSizeOfUsers());
+        testDataTracker.removeUser("user");
+        assertEquals(0, testDataTracker.getSizeOfUsers());
     }
     /**
      *Проверяет правильно ли выдается время в миллисекундах, потраченное пользователем на тест
      */
     @Test
     void GetElapsedUserTimeTest() throws InterruptedException {
-        testDataTracker.AddData("user4",1,2, System.currentTimeMillis());
+        testDataTracker.addData("user4","Информатика",2l);
         Thread.sleep(100);
-        assertEquals(100, testDataTracker.GetElapsedUserTime("user4"), 50);
+        assertEquals(100, testDataTracker.getElapsedUserTime("user4"), 50);
     }
 
     /**
@@ -77,16 +83,17 @@ class UserTestDataTrackerTest {
      */
     @Test
     void CheckUserRightTest(){
-        testDataTracker.AddData("user5",1,2,3L);
-        assertEquals(Boolean.TRUE,testDataTracker.CheckUser("user5"));
+        testDataTracker.addData("user5","Информатика",2l);
+        assertEquals(Boolean.TRUE,testDataTracker.checkUser("user5"));
     }
 
     /**
      * Проверяет метод, который проверяет проходит ли  пользователь тест(неправильный вариант)
      */
+    @Test
     void CheckUserWrongTest(){
-        testDataTracker.AddData("user5",1,2,3L);
-        assertEquals(Boolean.FALSE,testDataTracker.CheckUser("user6"));
+        testDataTracker.addData("user5","Информатика",2l);
+        assertEquals(Boolean.FALSE,testDataTracker.checkUser("user6"));
     }
 
 }
