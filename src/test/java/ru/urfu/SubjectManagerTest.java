@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,13 +17,19 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тестирует хранилище вариантов
+ */
 class SubjectManagerTest {
 
     private SubjectManager subjectManager;
 
+    @TempDir
+    static File tempDir;
+
     @BeforeAll
     public static void setUpBeforeClass() throws IOException {
-        File directory = new File("Test");
+        File directory = new File(tempDir, "Test");
         directory.mkdirs();
 
         File subject = new File(directory, "Математика");
@@ -47,16 +54,6 @@ class SubjectManagerTest {
         writer2.write("Ответ");
         writer2.close();
     }
-    @AfterAll
-    public static void setUpAfterClass() throws IOException {
-        Files.delete(Path.of("Test/Математика/1/answ/1.txt"));
-        Files.delete(Path.of("Test/Математика/1/ques/1.txt"));
-        Files.delete(Path.of("Test/Математика/1/answ"));
-        Files.delete(Path.of("Test/Математика/1/ques"));
-        Files.delete(Path.of("Test/Математика/1"));
-        Files.delete(Path.of("Test/Математика"));
-        Files.delete(Path.of("Test"));
-    }
 
     @BeforeEach
     public void setUp() {
@@ -69,7 +66,7 @@ class SubjectManagerTest {
      */
     @Test
     public void testPopulateDataAndGetVariant() {
-        subjectManager.populateData("Test");
+        subjectManager.populateData(tempDir.getPath() + "\\Test");
         QuesAns quesAns = subjectManager.getVariant("Математика", 1);
         assertEquals("Вопрос", quesAns.getQuestion(0));
         assertEquals("Ответ", quesAns.getAnswer(0));
@@ -80,7 +77,7 @@ class SubjectManagerTest {
      */
     @Test
     public void testAllSubjects() {
-        subjectManager.populateData("Test");
+        subjectManager.populateData(tempDir.getPath() + "\\Test");
         assertEquals("Математика", subjectManager.allSubjects().get(0));
     }
 }

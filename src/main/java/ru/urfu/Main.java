@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class Main {
     public static void main(String[] args) throws TelegramApiException {
-        Logic logic = new Logic("ЕГЭ");
+        Logic logic = new Logic("src\\main\\resources\\ЕГЭ");
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         String BOT_NAME = System.getenv("BOT_NAME");
         String BOT_TOKEN = System.getenv("BOT_TOKEN");

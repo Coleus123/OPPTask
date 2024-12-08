@@ -4,6 +4,7 @@ package ru.urfu;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,9 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LogicTest {
     Logic logic;
 
+    @TempDir
+    static File tempDir;
+
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
-        File directory = new File("Test");
+        File directory = new File(tempDir, "Test");
         directory.mkdirs();
 
         File subject = new File(directory, "Математика");
@@ -46,9 +50,10 @@ public class LogicTest {
         writer2.write("Ответ");
         writer2.close();
     }
+
     @BeforeEach
     void setUp() {
-        logic = new Logic("Test");
+        logic = new Logic(tempDir.getPath() + "\\Test");
     }
 
 
