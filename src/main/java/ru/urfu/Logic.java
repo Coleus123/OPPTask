@@ -96,7 +96,7 @@ public class Logic {
                         if (subjectManager.allSubjects().contains(text)) {
                             userTestDataTracker.addData(userId, text,0l);
                             String result = "Введите вариант, всего доступно " +
-                                   subjectManager.quantityVariants(text) + " вариантов";
+                                    subjectManager.quantityVariants(text) + " вариантов";
                             output.add(result);
                         }
                         else{
@@ -117,8 +117,8 @@ public class Logic {
                                 userTestDataTracker.addData(userId,
                                         userTestDataTracker.getSubject(userId), (long) number);
                                 output.add(subjectManager.getVariant(
-                                        userTestDataTracker.getSubject(userId),
-                                        userTestDataTracker.getOption(userId).intValue()).
+                                                userTestDataTracker.getSubject(userId),
+                                                userTestDataTracker.getOption(userId).intValue()).
                                         getQuestion(Math.toIntExact(userTestDataTracker.getNumberOfQuestion(userId))));
 
                             }
@@ -165,7 +165,7 @@ public class Logic {
                             subjectManager.getVariant(
                                             userTestDataTracker.getSubject(userId),
                                             userTestDataTracker.getOption(userId).intValue())
-                                            .getNumberOfQuestions()){
+                                    .getNumberOfQuestions()){
                         String question = subjectManager.getVariant(userTestDataTracker.getSubject(userId),
                                         userTestDataTracker.getOption(userId).intValue())
                                 .getQuestion(userTestDataTracker

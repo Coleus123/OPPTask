@@ -50,15 +50,17 @@ public class UserStatistics {
         for (File sub : subject){
             File[] statistics = sub.listFiles();
             for (File stat : statistics) {
-                try (BufferedReader br = new BufferedReader(new FileReader(stat))) {
-                    String[] data = br.readLine().split(" ");
-                    List<Long> userStat = new ArrayList<>();
-                    for(String singleData : data){
-                        userStat.add(Long.parseLong(singleData));
+                if(!stat.getName().equals(".gitkeep")) {
+                    try (BufferedReader br = new BufferedReader(new FileReader(stat))) {
+                        String[] data = br.readLine().split(" ");
+                        List<Long> userStat = new ArrayList<>();
+                        for (String singleData : data) {
+                            userStat.add(Long.parseLong(singleData));
+                        }
+                        userStatistics.get(sub.getName()).put(stat.getName(), userStat);
+                    } catch (IOException | NumberFormatException e) {
+                        e.printStackTrace();
                     }
-                    userStatistics.get(sub.getName()).put(stat.getName(), userStat);
-                } catch (IOException | NumberFormatException e) {
-                    e.printStackTrace();
                 }
             }
         }
